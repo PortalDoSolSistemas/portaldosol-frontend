@@ -1,0 +1,127 @@
+
+<po-container p-no-border="true">
+    <div class="row mb-5">
+        <div class="col-4">
+            <h1 class="po-page-header-title">LISTA DE ENCOMENDAS</h1>
+        </div>
+        <div class="col-8">
+             <form [formGroup]="form">
+                <po-button 
+                    (p-click)="navigateToNew()" 
+                    class="float-end" 
+                    p-label="Novo" 
+                    p-icon="po-icon po-icon-plus">
+                </po-button>
+                <po-button 
+                    (p-click)="print()" 
+                    class="float-end me-3" 
+                    p-label="Imprimir" 
+                    p-icon="po-icon po-icon-print">
+                </po-button>  
+                <po-button 
+                    (p-click)="modalSearchOpen()" 
+                    class="float-end me-3" 
+                    p-label="Busca Avançada" 
+                    p-icon="po-icon po-icon-search"
+                    [p-disabled]="(form.get('searchInput').value).length > 0">
+                </po-button> 
+                <po-input 
+                    formControlName="searchInput" 
+                    class="float-end me-3 inputSearch" 
+                    p-placeholder="Código ou Nome do Morador"
+                    p-clean="true"
+                    p-icon="po-icon-search">
+                </po-input>
+                <po-switch 
+                    class="float-end me-5"
+                    formControlName="status"
+                    p-label="Somente Aguardando Entrega"
+                    p-label-off="Não"
+                    p-label-on="Sim"
+                    > 
+                </po-switch>
+             </form>  
+        </div>  
+    </div>
+    <po-table
+        p-height="450"
+        [p-columns]="columns"
+        [p-items]="parcels"
+        [p-actions]="tableActions"
+        p-sort="true"
+        p-hide-columns-manager="true"
+        (p-show-more)="showMore()"
+        [p-show-more-disabled]="disableShowMore"
+    >
+    </po-table>
+</po-container> 
+
+<po-modal 
+  #modalDelete
+  p-title="Confirmar Exclusão" 
+  [p-primary-action]="confirm" 
+  [p-secondary-action]="close"
+  p-size="sm">
+   Deseja realmente excluir o morador?
+</po-modal>
+
+<po-modal 
+  #modalAdvancedSearch
+  p-title="Busca Avançada" 
+  [p-primary-action]="confirmModalSearch" 
+  [p-secondary-action]="closeModalSearch"
+  p-size="xl">
+   <form class="po-row" [formGroup]="form">
+        <po-combo 
+            class="po-md-6"
+            formControlName="resident_id"
+            p-label="Nome"
+            p-debounce-time="300"
+            p-filter-minlength="3" 
+            [p-filter-service]="filter"> 
+        </po-combo>
+        <po-input
+            class="po-md-3"
+            formControlName="block"
+            p-label="Bloco">
+        </po-input>
+        <po-input
+            class="po-md-3"
+            formControlName="apartment"
+            p-label="Apartamento">
+        </po-input>
+        <div class="po-md-12 mt-4"></div>
+        <po-input
+            class="po-md-4"
+            formControlName="code"
+            p-label="Code">
+        </po-input>
+       <!--  <po-datepicker 
+            class="po-md-4" 
+            formControlName="date"
+            p-label="Data de Recebimento" 
+            [p-clean]="true"> 
+        </po-datepicker> -->
+
+        <po-datepicker-range 
+            class="po-md-4" 
+            formControlName="date"
+            p-label="Data de Recebimento" 
+            [p-clean]="true"> 
+        </po-datepicker-range>
+        
+       <!--  <po-datepicker 
+            class="po-md-4" 
+            formControlName="delivered_date"
+            p-label="Data da Entrega" 
+            [p-clean]="true"> 
+        </po-datepicker> -->
+        <po-datepicker-range
+            class="po-md-4" 
+            formControlName="delivered_date"
+            [p-disabled]="form.get('status').value"
+            p-label="Data da Entrega" 
+            [p-clean]="true"> 
+        </po-datepicker-range>
+   </form>
+</po-modal> 

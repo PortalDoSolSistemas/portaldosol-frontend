@@ -1,0 +1,34 @@
+.padTop {
+    padding-top: 56px;;
+}
+
+.positionBar {
+   position: fixed;
+   top: 1px;
+   right: 81px;
+}
+
+.user {
+    z-index: 3;
+    font-family: "Roboto-Bold";
+    font-size: 14px;
+    line-height: 24px;
+    color: #c9357d;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+::ng-deep { 
+    .po-combo-container-content {
+        list-style: none;
+    }
+    .po-combo-item {
+        text-decoration: none;
+    }
+    .po-combo-item:hover, .po-select-item:hover {
+        background-color: #FFC0CB!important;
+    }
+    .po-input:disabled {
+        color: #4a5c60;
+    }
+}

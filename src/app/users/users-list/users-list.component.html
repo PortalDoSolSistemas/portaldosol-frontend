@@ -1,0 +1,33 @@
+
+<po-container p-no-border="true">
+    <div class="row mb-5">
+        <div class="col-6">
+            <h1 class="po-page-header-title">LISTA DE USUÁRIOS</h1>
+        </div>
+        <div class="col-6">
+                <po-button 
+                    (p-click)="navigateToNew()" 
+                    class="float-end" 
+                    p-label="Novo" 
+                    p-icon="po-icon po-icon-plus">
+                </po-button> 
+        </div>  
+    </div>
+    <po-table
+        [p-columns]="columns"
+        [p-items]="users"
+        [p-actions]="tableActions"
+        p-sort="true"
+        p-hide-columns-manager="true"
+    >
+    </po-table>
+</po-container> 
+
+<po-modal 
+  p-title="Confirmar Exclusão" 
+  [p-primary-action]="confirm" 
+  [p-secondary-action]="close"
+  p-size="sm">
+   Deseja realmente excluir o usuário?
+</po-modal>
+

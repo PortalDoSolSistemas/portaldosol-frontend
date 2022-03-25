@@ -1,0 +1,11 @@
+:host::ng-deep {
+    .po-container {
+        padding: 16px !important;
+    }
+    .po-input {
+        width: 280px;
+    }
+    .po-field-container-content {
+        padding: 0;
+    }
+}

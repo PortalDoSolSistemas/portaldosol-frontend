@@ -1,0 +1,54 @@
+
+ <po-page-edit 
+ [p-title]="id ? 'EDITAR USUÁRIO' : 'CADASTRAR USUÁRIO'" 
+ (p-cancel)="cancel()" 
+ (p-save)="save()" 
+ [p-disable-submit]="!form.valid"
+ [p-literals]="customLiterals">
+
+ <po-divider></po-divider>
+
+ <form [formGroup]="form" class= "px-5">
+    <div class="row">
+        <po-input
+          class="col-6"
+          p-label="Nome"
+          formControlName="name"
+          p-clean="true"
+        ></po-input>
+
+        <po-input
+          class="col-6"
+          p-label="Email"
+          formControlName="email"
+          p-clean="true"
+          p-icon="po-icon-mail"
+        ></po-input>
+    </div>
+    <div class="row">
+        <po-password
+          class="col-4"
+          p-label="Senha"
+          formControlName="password"
+          p-clean="true"
+        ></po-password>
+
+        <po-password
+          class="col-4"
+          p-label="Confirmar Senha"
+          formControlName="confirmPassword"
+          p-clean="true"
+        ></po-password>
+
+        <po-switch 
+          class="col-4"
+          p-label="Administrador"
+          formControlName="admin"
+          p-label-off="Não"
+          p-label-on="Sim"> 
+        </po-switch>
+    </div>
+ </form> 
+
+</po-page-edit>
+

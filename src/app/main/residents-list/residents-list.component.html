@@ -1,0 +1,52 @@
+
+<po-container p-no-border="true">
+    <div class="row mb-5">
+        <div class="col-4">
+            <h1 class="po-page-header-title">LISTA DE MORADORES</h1>
+        </div>
+        <div class="col-8">
+             <form [formGroup]="form">
+                <po-button 
+                    (p-click)="navigateToNew()" 
+                    class="float-end" 
+                    p-label="Novo" 
+                    p-icon="po-icon po-icon-plus">
+                </po-button> 
+                <po-input 
+                  formControlName="searchInput" 
+                  class="float-end me-3" 
+                  p-placeholder="Nome ou CPF(somente números)"
+                  p-icon="po-icon-search"
+                  [p-clean]="true"
+                 >
+                </po-input>
+                <po-input 
+                  formControlName="searchInputAddress" 
+                  class="float-end me-3" 
+                  p-placeholder="Apartamento"
+                  [p-clean]="true"
+                  p-icon="po-icon-search">
+                </po-input>
+             </form>  
+        </div>  
+    </div>
+    <po-table
+        p-height="450"
+        [p-columns]="columns"
+        [p-items]="residents"
+        [p-actions]="tableActions"
+        p-sort="true"
+        p-hide-columns-manager="true"
+        (p-show-more)="showMore()"
+        [p-show-more-disabled]="disableShowMore"
+    >
+    </po-table>
+</po-container> 
+
+<po-modal 
+  p-title="Confirmar Exclusão" 
+  [p-primary-action]="confirm" 
+  [p-secondary-action]="close"
+  p-size="sm">
+   Deseja realmente excluir o morador?
+</po-modal>

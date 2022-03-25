@@ -1,0 +1,134 @@
+
+ <po-page-edit 
+    [p-title]="id ? 'EDITAR MORADOR' : 'CADASTRAR MORADOR'" 
+    (p-cancel)="cancel()" 
+    (p-save)="save()" 
+    [p-disable-submit]="form.invalid"
+    [p-literals]="customLiterals">
+
+    <po-divider></po-divider>
+
+    <form [formGroup]="form" class= "px-5">
+
+      <div class="row">
+        <po-input
+          class="col-2"
+          p-label="Bloco"
+          formControlName="block"
+          p-clean="true"
+        ></po-input>
+
+        <po-input
+          class="col-2"
+          p-label="Apartamento"
+          formControlName="apartment"
+          p-clean="true"
+        ></po-input>
+      </div>
+
+      <div class="row mt-2">
+        <po-input 
+          class="col-4" 
+          p-label="Nome" 
+          formControlName="name"
+					p-clean="true"
+				 > 
+        </po-input>
+
+        <po-email 
+          class="col-3" 
+          p-label="Email" 
+          formControlName="email"
+					p-clean="true"> 
+        </po-email>
+
+				<po-input 
+				  class="col-2" 
+          p-mask="999.999.999-99"
+          p-label="CPF" 
+          formControlName="cpf"
+          [p-clean]="true">
+			 </po-input>
+
+				<po-input 
+          class="col-2" 
+          p-label="RG" 
+          formControlName="rg"
+					[p-clean]="true"
+          p-mask="99.999.999-9"> 
+				</po-input>
+      </div>
+
+      <div class="row mt-2">
+         <po-datepicker 
+          class="col-2" 
+          p-label="Data de Aniversário" 
+          formControlName="birthdate"
+          [p-clean]="true"> 
+        </po-datepicker>
+
+        <po-input 
+          class="col-2" 
+          p-label="Telefone" 
+          formControlName="tel"
+          [p-clean]="true"
+          p-mask="(99) 9999-9999"> 
+        </po-input>
+
+        <po-input 
+          class="col-2" 
+          p-label="Celular" 
+          formControlName="cel"
+          [p-clean]="true"
+          p-mask="(99) 99999-9999"> 
+        </po-input>
+
+        <po-input 
+          class="col-2" 
+          p-label="Chaveiro" 
+          formControlName="keychain"
+          [p-clean]="true"> 
+        </po-input>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-6">
+          <po-divider p-label="Piscina"></po-divider>
+          <div class="row">
+            <po-datepicker 
+              class="col-4" 
+              p-label="Data de Emissão" 
+              formControlName="poolRegistrationDate"
+              [p-clean]="true"> 
+            </po-datepicker>
+            <po-datepicker 
+              class="col-4" 
+              p-label="Data de Validade" 
+              formControlName="poolExpirationDate"
+              [p-clean]="true"> 
+            </po-datepicker>
+          </div>
+        </div>
+        <div class="col-6">
+          <po-divider p-label="Aluguel"></po-divider>
+          <div class="row">
+            <po-datepicker 
+              class="col-4" 
+              p-label="Data Início" 
+              formControlName="rentStartDate"
+              [p-clean]="true"> 
+            </po-datepicker>
+            <po-datepicker 
+              class="col-4" 
+              p-label="Data final" 
+              formControlName="rentFinalDate"
+              [p-clean]="true"> 
+            </po-datepicker>
+          </div>
+        </div>
+      </div>
+        
+    </form>
+
+  </po-page-edit>
+

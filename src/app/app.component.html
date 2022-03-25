@@ -1,0 +1,30 @@
+<div *ngIf="showNavbar" class="d-flex justify-content-end pt-3 positionBar">
+    <po-navbar 
+        [p-items]="items" 
+        [p-icon-actions]="actions" 
+        p-shadow="true" 
+        p-logo="assets/img/logo.jpeg"
+    ></po-navbar>
+
+    <span class="user">
+        Olá, {{userName}}
+    </span>    
+</div>
+
+<ngx-spinner
+    bdColor = "rgba(0, 0, 0, 0.5)"
+    size = "large"
+    color = "#fff"
+    type = "ball-scale-ripple-multiple"
+    fullScreen = "true"
+>
+    <h2 style="color: white" > Aguarde... </h2>
+</ngx-spinner>
+
+<div [ngClass]="{'padTop': showNavbar}"></div>
+
+<router-outlet></router-outlet>
+
+
+
+

@@ -1,0 +1,119 @@
+
+<po-page-edit 
+    p-title="CONTROLE DE ENCOMENDAS" 
+    (p-cancel)="cancel()" 
+    (p-save)="save()" 
+    [p-literals]="customLiterals"
+    [p-disable-submit]="form.invalid">
+
+    <po-divider></po-divider>
+
+    <form [formGroup]="form">
+        <div class="row">
+            <po-input 
+                class="col-3"
+                formControlName="code"
+                [p-clean]="true"
+                p-label="Código">
+            </po-input>
+            <po-datepicker 
+                class="col-2"
+                formControlName="date" 
+                p-label="Data" 
+                [p-clean]="true"> 
+           </po-datepicker>
+           <po-select
+                class="col-3"
+                formControlName="shipping_company"
+                p-label="Transportadora"
+                [p-options]="shippingCompanyOptions">
+            </po-select>
+            <po-select
+                class="col-3"
+                formControlName="local"
+                p-label="Local"
+                [p-options]="localOptions">
+            </po-select>
+        </div>
+        <div class="row mt-2">
+            <po-input
+                class="col-2"
+                formControlName="block"
+                [p-clean]="true"
+                (p-blur)="openModalCheck()"
+                p-label="Bloco"
+                p-disabled="false">
+           </po-input>
+            <po-input
+                class="col-2"
+                formControlName="apartment"
+                p-label="Apartamento"
+                [p-clean]="true"
+                (p-blur)="openModalCheck()"
+                p-disabled="false">
+            </po-input>
+            <po-combo 
+                class="col-6"
+                formControlName="resident_id"
+                p-label="Nome"
+                [p-clean]="true"
+                p-debounce-time="300"
+                p-filter-minlength="3" 
+                [p-filter-service]="filter"
+                (p-change)="changeResident($event)"> 
+            </po-combo>
+        </div>
+        <div class="row mt-2">
+            <po-textarea 
+              class="col-12"
+              p-optional="true"
+              formControlName="observations" 
+              p-label="Observações"> 
+            </po-textarea>
+        </div>
+        <div class="row mt-2">
+            <po-switch  
+                class="col-1"
+                formControlName="is_delivered"
+                p-label="Entregue"
+                p-label-off="Não"
+                p-label-on="Sim"> 
+           </po-switch>
+           <po-datepicker 
+                class="col-2" 
+                formControlName="delivered_date"
+                p-label="Data da Entrega" 
+                [p-clean]="true"
+                [p-disabled]="!form.get('is_delivered').value"> 
+         </po-datepicker>
+        </div>
+    </form>
+    <po-modal 
+        #poModal
+        [p-title]="modalTitle" 
+        [p-primary-action]="confirm" 
+        [p-secondary-action]="close"
+        p-size="xl">
+
+        <div class="po-row">
+            <div class="po-md-9">
+                <po-input [(ngModel)]="newResident" > </po-input>
+            </div>
+            <div class="po-md-3">
+                <po-button p-label="Cadastro Rápido" class="float-end pt-2" (p-click)="createNewResident()"> </po-button>
+            </div>
+        </div>
+          
+        <po-table
+            [p-columns]="columns"
+            [p-items]="tableItems"
+            p-sort="true"
+            p-selectable="true"
+            p-single-select="true"
+            (p-selected)="selected($event)"
+            (p-unselected)="selected($event)"
+            p-hide-columns-manager="true">
+        </po-table>
+  </po-modal>
+
+</po-page-edit>

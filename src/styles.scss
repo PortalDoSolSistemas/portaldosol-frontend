@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+.alert-msg {
+    top: 12%;
+    width: 50%; 
+    position: fixed;
+    padding:0px 15px;
+    text-align: center;
+
+    &.alert {
+        position: relative;
+        -webkit-transition: all .4s ease 0s;
+        transition: all .4s ease 0s;
+    }
+}

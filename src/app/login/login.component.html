@@ -1,0 +1,16 @@
+<div *ngIf="errorMsg" class="alert-msg"> 
+    <div  class="alert alert-danger" role="alert">
+        {{errorMsg}}
+    </div>
+</div>
+
+<po-page-login
+    p-product-name="CONTROLE DE ENCOMENDAS"
+    [p-literals]="literals"
+    [p-languages]="[]"
+    [p-hide-remember-user]="true"
+    p-contact-email="blabla@gmail.com"
+    (p-login-submit)="login($event)"
+    [p-background]="background"
+    p-logo="assets/img/logo.jpeg">
+</po-page-login>

@@ -1,0 +1,19 @@
+:host::ng-deep {
+    .po-container {
+        padding: 16px !important;
+    }
+    .inputSearch{
+        width: 280px;
+    }
+    .po-field-container-content {
+        padding: 0;
+    }
+
+    .po-datepicker-range-field {
+        margin: 0px;
+    }
+
+    .po-table-main-container {
+        overflow-x: hidden !important;
+    }
+}
