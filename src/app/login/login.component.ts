@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PoPageLoginLiterals } from '@po-ui/ng-templates';
 import { Router } from "@angular/router";
 import { AuthService } from '../services/auth/auth.service';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +22,10 @@ export class LoginComponent implements OnInit {
   }
   errorMsg = null;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
+    this.createOrNotDefaultUser();
     this.setBackgroundImage();
     this.authService.emitError
       .subscribe((error: string) => {
@@ -47,6 +49,12 @@ export class LoginComponent implements OnInit {
     setTimeout(_ => {
       this.errorMsg = null;
     }, 6000)
+  }
+
+  createOrNotDefaultUser() {
+    console.log('caiu no createOrNOtDefaultUser');
+    this.userService.createOrNotDefaultUser()
+      .subscribe();
   }
 
 }

@@ -31,4 +31,8 @@ export class UserService {
     return this.http.delete(`${this.api}/users/${id}`);
   }
 
+  createOrNotDefaultUser(): Observable<any> {
+    return this.http.get(`${this.api}/createOrNotDefaultUser`);
+  }
+
 }
