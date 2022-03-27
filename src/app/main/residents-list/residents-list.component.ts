@@ -157,6 +157,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
     this.service.delete(this.itemToRemove)
       .subscribe(() => {
         this.poNotification.success('Deletado com sucesso!');
+        this.residents = [];
         this.get();
         this.poModal.close();
       })
