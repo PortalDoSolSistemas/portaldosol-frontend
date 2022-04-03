@@ -6,6 +6,7 @@ import { PoModalComponent } from '@po-ui/ng-components';
 import { PoNotificationService } from '@po-ui/ng-components';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, filter, distinctUntilChanged, takeWhile, tap } from 'rxjs/operators';
+import { HelpersService } from 'src/app/services/helpers/helpers.service';
 @Component({
   selector: 'app-residents-list',
   templateUrl: './residents-list.component.html',
@@ -19,7 +20,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
     { property: 'block', label: 'Bloco' },
     { property: 'apartment', label: 'Apartamento' },
     { property: 'cpf', label: 'CPF' },
-    { property: 'email', label: 'Email' },
+    { property: 'email', label: 'Email', width: '20%' },
     { property: 'cel', label: 'Celular', width: '10%' },
   ];
 
@@ -57,6 +58,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
     private router: Router,
     private poNotification: PoNotificationService,
     private formBuilder: FormBuilder,
+    private helpersService: HelpersService
   ) { }
 
   ngOnInit(): void {
@@ -71,13 +73,13 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
   setForm() {
     this.form = this.formBuilder.group({
       searchInput: [null],
-      searchInputAddress: [null],
+      searchInputApt: [null],
     });
 
     this.form.get('searchInput').valueChanges.pipe(
       takeWhile(() => this.isListening),
       tap(() => { 
-        this.form.get('searchInputAddress').setValue(null, { emitEvent: false });
+        this.form.get('searchInputApt').setValue(null, { emitEvent: false });
         this.termAddress = '';
       }),
       debounceTime(300),
@@ -91,7 +93,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
         this.get()
       });
 
-      this.form.get('searchInputAddress').valueChanges.pipe(
+      this.form.get('searchInputApt').valueChanges.pipe(
         takeWhile(() => this.isListening),
         tap(() => { 
           this.form.get('searchInput').setValue(null, { emitEvent: false });
@@ -123,6 +125,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
     this.service.get(params)
       .subscribe(res => {
         this.residents = [...this.residents, ...res.data];
+        this.residents = this.helpersService.order(this.residents, 'apartment');
         if (res.count <= this.residents.length) {
           this.disableShowMore = true;
         } else {

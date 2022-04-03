@@ -9,32 +9,33 @@
     <po-divider></po-divider>
 
     <form [formGroup]="form" class= "px-5">
-
+      
       <div class="row">
         <po-input
           class="col-2"
-          p-label="Bloco"
+          p-label="Bloco*"
           formControlName="block"
           p-clean="true"
         ></po-input>
 
         <po-input
           class="col-2"
-          p-label="Apartamento"
+          p-label="Apartamento*"
           formControlName="apartment"
           p-clean="true"
         ></po-input>
-      </div>
 
-      <div class="row mt-2">
         <po-input 
           class="col-4" 
-          p-label="Nome" 
+          p-label="Nome*" 
           formControlName="name"
 					p-clean="true"
 				 > 
         </po-input>
+      </div>
 
+      <div class="row mt-2">
+       
         <po-email 
           class="col-3" 
           p-label="Email" 

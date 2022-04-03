@@ -35,12 +35,12 @@ export class ResidentsNewEditComponent implements OnInit {
 
  setForm(){
    this.form = this.formBuilder.group({
-     name: [null],
+     name: [null, Validators.required],
      email: [null, Validators.email],
      rg: [null],
      cpf: [null],
-     apartment: [null],
-     block: [null],
+     apartment: [null, Validators.required],
+     block: [null, Validators.required],
      birthdate: [null],
      tel: [null],
      cel: [null],

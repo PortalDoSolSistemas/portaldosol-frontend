@@ -14,24 +14,24 @@
                 class="col-3"
                 formControlName="code"
                 [p-clean]="true"
-                p-label="Código">
+                p-label="Código*">
             </po-input>
             <po-datepicker 
                 class="col-2"
                 formControlName="date" 
-                p-label="Data" 
+                p-label="Data*" 
                 [p-clean]="true"> 
            </po-datepicker>
            <po-select
                 class="col-3"
                 formControlName="shipping_company"
-                p-label="Transportadora"
+                p-label="Transportadora*"
                 [p-options]="shippingCompanyOptions">
             </po-select>
             <po-select
                 class="col-3"
                 formControlName="local"
-                p-label="Local"
+                p-label="Local*"
                 [p-options]="localOptions">
             </po-select>
         </div>
@@ -41,13 +41,13 @@
                 formControlName="block"
                 [p-clean]="true"
                 (p-blur)="openModalCheck()"
-                p-label="Bloco"
+                p-label="Bloco*"
                 p-disabled="false">
            </po-input>
             <po-input
                 class="col-2"
                 formControlName="apartment"
-                p-label="Apartamento"
+                p-label="Apartamento*"
                 [p-clean]="true"
                 (p-blur)="openModalCheck()"
                 p-disabled="false">
@@ -55,7 +55,7 @@
             <po-combo 
                 class="col-6"
                 formControlName="resident_id"
-                p-label="Nome"
+                p-label="Nome*"
                 [p-clean]="true"
                 p-debounce-time="300"
                 p-filter-minlength="3" 

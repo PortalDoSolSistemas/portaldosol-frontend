@@ -67,7 +67,7 @@ export class ParcelsListComponent implements OnInit {
   params = {
     page: 1,
     term: '',
-    status: false,
+    status: true,
     limit: 10,
   }
   filtersToPrint: any;
@@ -92,7 +92,7 @@ export class ParcelsListComponent implements OnInit {
   setForm() {
     this.form = this.formBuilder.group({
       searchInput: [''],
-      status: [false],
+      status: [true],
       resident_id: [null],
       block: [null],
       apartment: [null],
