@@ -9,7 +9,38 @@
     <po-divider></po-divider>
 
     <form [formGroup]="form">
+
         <div class="row">
+            <po-input
+                class="col-2"
+                formControlName="block"
+                [p-clean]="true"
+                (p-blur)="openModalCheck()"
+                p-label="Bloco*"
+                p-disabled="false"
+                p-auto-focus="true">
+           </po-input>
+            <po-input
+                class="col-2"
+                formControlName="apartment"
+                p-label="Apartamento*"
+                [p-clean]="true"
+                (p-blur)="openModalCheck()"
+                p-disabled="false">
+            </po-input>
+            <po-combo 
+                class="col-6"
+                formControlName="resident_id"
+                p-label="Nome*"
+                [p-clean]="true"
+                p-debounce-time="300"
+                p-filter-minlength="3" 
+                [p-filter-service]="filter"
+                (p-change)="changeResident($event)"> 
+            </po-combo>
+        </div>
+
+        <div class="row mt-2">
             <po-input 
                 class="col-3"
                 formControlName="code"
@@ -35,34 +66,7 @@
                 [p-options]="localOptions">
             </po-select>
         </div>
-        <div class="row mt-2">
-            <po-input
-                class="col-2"
-                formControlName="block"
-                [p-clean]="true"
-                (p-blur)="openModalCheck()"
-                p-label="Bloco*"
-                p-disabled="false">
-           </po-input>
-            <po-input
-                class="col-2"
-                formControlName="apartment"
-                p-label="Apartamento*"
-                [p-clean]="true"
-                (p-blur)="openModalCheck()"
-                p-disabled="false">
-            </po-input>
-            <po-combo 
-                class="col-6"
-                formControlName="resident_id"
-                p-label="Nome*"
-                [p-clean]="true"
-                p-debounce-time="300"
-                p-filter-minlength="3" 
-                [p-filter-service]="filter"
-                (p-change)="changeResident($event)"> 
-            </po-combo>
-        </div>
+        
         <div class="row mt-2">
             <po-textarea 
               class="col-12"

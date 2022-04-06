@@ -16,11 +16,11 @@ export class ParcelsListComponent implements OnInit {
   @ViewChild('modalAdvancedSearch', { static: true }) poModalAdvancedSearch: PoModalComponent;
 
   columns: Array<PoTableColumn> = [
-    { property: 'code', label: 'Código' },
-    { property: 'date', label: 'Data de Recebimento' },
+    { property: 'code', label: 'Código', width: '15%' },
+    { property: 'date', label: 'Data de Recebimento', width: '15%' },
     { property: 'name', label: 'Morador' },
-    { property: 'block', label: 'Bloco' },
-    { property: 'apartment', label: 'Apartamento' },
+    { property: 'block', label: 'Bloco',  width: '10%' },
+    { property: 'apartment', label: 'Apartamento',  width: '10%' },
     { property: 'delivered_date', label: 'Data de Entrega', width: '10%' },
   ];
 
