@@ -89,7 +89,7 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
   setForm() {
     this.form = this.formBuilder.group({
       code: [null, Validators.required],
-      date: [null, Validators.required],
+      date: [this.today, Validators.required],
       block: [null, Validators.required],
       apartment: [null, Validators.required],
       resident_id: [null, Validators.required],
@@ -100,22 +100,17 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
       observations: [null]
     });
     this.observeIsDelivered();
-
-    if(!this.id) {
-      this.form.get('date').setValue(this.today);
-    }
-
   }
 
   observeIsDelivered() {
     this.form.get('is_delivered').valueChanges
       .subscribe(value => {
         if (value) {
-          this.form.get('delivered_date').setValidators([Validators.required]);
           this.form.get('delivered_date').setValue(this.today);
+          this.form.get('delivered_date').setValidators([Validators.required]);
         } else {
-          this.form.get('delivered_date').clearValidators();
           this.form.get('delivered_date').setValue(null);
+          this.form.get('delivered_date').clearValidators();
         }
         this.form.get('delivered_date').updateValueAndValidity();
       });
