@@ -89,7 +89,7 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
   setForm() {
     this.form = this.formBuilder.group({
       code: [null, Validators.required],
-      date: [this.today, Validators.required],
+      date: [null, Validators.required],
       block: [null, Validators.required],
       apartment: [null, Validators.required],
       resident_id: [null, Validators.required],
@@ -100,6 +100,10 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
       observations: [null]
     });
     this.observeIsDelivered();
+
+    if(!this.id) {
+      this.form.get('date').setValue(this.today);
+    }
   }
 
   observeIsDelivered() {
