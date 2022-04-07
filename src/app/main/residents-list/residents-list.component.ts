@@ -16,7 +16,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
   @ViewChild(PoModalComponent, { static: true }) poModal: PoModalComponent;
 
   columns: Array<PoTableColumn> = [
-    { property: 'name', label: 'Nome' },
+    { property: 'name', label: 'Nome', width: '30%' },
     { property: 'block', label: 'Bloco' },
     { property: 'apartment', label: 'Apartamento' },
     { property: 'cpf', label: 'CPF' },
