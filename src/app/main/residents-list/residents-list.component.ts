@@ -17,8 +17,8 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
 
   columns: Array<PoTableColumn> = [
     { property: 'name', label: 'Nome', width: '30%' },
-    { property: 'block', label: 'Bloco' },
-    { property: 'apartment', label: 'Apartamento' },
+    { property: 'block', label: 'Bloco',  width: '10%' },
+    { property: 'apartment', label: 'Apartamento',  width: '10%' },
     { property: 'cpf', label: 'CPF' },
     { property: 'email', label: 'Email', width: '20%' },
     { property: 'cel', label: 'Celular', width: '10%' },
@@ -52,7 +52,8 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
   disableShowMore = false;
   term = '';
   termAddress = '';
-
+  sort: any;
+  
   constructor(
     private service: ResidentsService,
     private router: Router,
@@ -113,7 +114,7 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
 
 
   get() {
-    const params: any = {
+    let params: any = {
       page: this.page,
     }
     if(this.term) {
@@ -122,10 +123,14 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
     if(this.termAddress) {
       params.termAddress = this.termAddress
     }
+    if(this.sort){
+      params = {...params, ...this.sort};
+    }
+
     this.service.get(params)
       .subscribe(res => {
         this.residents = [...this.residents, ...res.data];
-        this.residents = this.helpersService.order(this.residents, 'apartment');
+       // this.residents = this.helpersService.order(this.residents, 'apartment');
         if (res.count <= this.residents.length) {
           this.disableShowMore = true;
         } else {
@@ -169,6 +174,25 @@ export class ResidentsListComponent implements OnInit, OnDestroy {
   showMore() {
     this.page += 1;
     this.get();
+  }
+
+  sortBy(event){
+    this.page = 1;
+    let sort = {
+      sortProperty: event.column.property,
+      sortType: this.mapSortType(event.type)
+    }
+    this.residents = [];
+    this.sort = sort;
+    this.get();
+  }
+
+  mapSortType(type): string {
+    if(type === 'ascending') {
+      return 'asc';
+    } else {
+      return 'desc'
+    }
   }
 
 }
