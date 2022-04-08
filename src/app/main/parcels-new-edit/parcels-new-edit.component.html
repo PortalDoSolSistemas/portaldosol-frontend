@@ -11,7 +11,7 @@
     <form [formGroup]="form">
 
         <div class="row">
-            <po-input
+            <po-number
                 class="col-2"
                 formControlName="block"
                 [p-clean]="true"
@@ -19,15 +19,15 @@
                 p-label="Bloco*"
                 p-disabled="false"
                 >
-           </po-input>
-            <po-input
+           </po-number>
+            <po-number
                 class="col-2"
                 formControlName="apartment"
                 p-label="Apartamento*"
                 [p-clean]="true"
                 (p-blur)="openModalCheck()"
                 p-disabled="false">
-            </po-input>
+            </po-number>
             <po-combo 
                 class="col-6"
                 formControlName="resident_id"

@@ -19,8 +19,8 @@ export class ParcelsListComponent implements OnInit {
     { property: 'code', label: 'Código', width: '15%' },
     { property: 'date', label: 'Data de Recebimento', width: '15%' },
     { property: 'name', label: 'Morador' },
-    { property: 'block', label: 'Bloco',  width: '10%' },
-    { property: 'apartment', label: 'Apartamento',  width: '10%' },
+    { property: 'block', label: 'Bloco', width: '10%' },
+    { property: 'apartment', label: 'Apartamento', width: '10%' },
     { property: 'delivered_date', label: 'Data de Entrega', width: '10%' },
   ];
 
@@ -68,9 +68,10 @@ export class ParcelsListComponent implements OnInit {
     page: 1,
     term: '',
     status: true,
-    limit: 10,
+    limit: 100,
   }
   filtersToPrint: any;
+  sort: any;
 
   constructor(
     public filter: ResidentsFilter,
@@ -111,15 +112,16 @@ export class ParcelsListComponent implements OnInit {
         this.filtersToPrint = null;
         this.resetForm();
         this.parcels = [];
-        this.params.page = 1;
+        this.resetParams();
         this.params.term = value;
         this.get();
       });
 
     this.form.get('status').valueChanges.subscribe((value) => {
+      this.form.get('searchInput').setValue('');
+      this.resetParams();
       this.params.status = value;
       this.parcels = [];
-      this.params.page = 1;
       if (value) {
         this.form.get('delivered_date').setValue(null);
       }
@@ -186,10 +188,10 @@ export class ParcelsListComponent implements OnInit {
   }
 
   confirmSearch() {
+    this.params.page = 1;
     let params = {
       ...this.params,
       ...this.form.value,
-      page: 1,
       term: ''
     };
     if (params.date) {
@@ -203,6 +205,7 @@ export class ParcelsListComponent implements OnInit {
     this.filtersToPrint = { ...params };
     this.parcels = [];
     this.closeSearch();
+    this.params = { ...params };
     this.get(params);
   }
 
@@ -235,6 +238,38 @@ export class ParcelsListComponent implements OnInit {
         const blob = window.URL.createObjectURL(file);
         window.open(blob);
       });
+  }
+
+  sortBy(event) {
+    this.params.page = 1;
+    let sort = {
+      sortProperty: event.column.property,
+      sortType: this.mapSortType(event.type)
+    }
+    this.parcels = [];
+    this.sort = sort;
+    const sortParams = {
+      ...this.params,
+      ...this.sort
+    }
+    this.get(sortParams);
+  }
+
+  mapSortType(type): string {
+    if (type === 'ascending') {
+      return 'asc';
+    } else {
+      return 'desc'
+    }
+  }
+
+  resetParams() {
+    this.params = {
+      page: 1,
+      term: '',
+      status: this.form.get('status').value,
+      limit: 100,
+    }
   }
 
 
