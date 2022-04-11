@@ -68,7 +68,7 @@ export class ParcelsListComponent implements OnInit {
     page: 1,
     term: '',
     status: true,
-    limit: 100,
+    limit: 200,
   }
   filtersToPrint: any;
   sort: any;
@@ -268,7 +268,7 @@ export class ParcelsListComponent implements OnInit {
       page: 1,
       term: '',
       status: this.form.get('status').value,
-      limit: 100,
+      limit: 200,
     }
   }
 
