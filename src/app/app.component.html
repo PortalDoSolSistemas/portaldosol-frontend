@@ -21,7 +21,9 @@
     <h2 style="color: white" > Aguarde... </h2>
 </ngx-spinner>
 
-<div [ngClass]="{'padTop': showNavbar}"></div>
+<ng-container *ngIf="showNavbar">
+    <div class="customPadTop"></div>
+</ng-container>
 
 <router-outlet></router-outlet>
 

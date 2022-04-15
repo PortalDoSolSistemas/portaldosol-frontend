@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoPageEditLiterals, PoNotificationService, PoModalComponent, PoModalAction, PoTableColumn } from '@po-ui/ng-components';
+import { PoPageEditLiterals, PoNotificationService, PoModalComponent, PoModalAction, PoTableColumn, PoInputComponent } from '@po-ui/ng-components';
 import { takeWhile } from 'rxjs/operators';
 import { ParcelsService } from 'src/app/services/parcels/parcels.service';
 import { ResidentsFilter } from 'src/app/services/residents/residents-filter';
@@ -15,6 +15,7 @@ import * as moment from 'moment';
 })
 export class ParcelsNewEditComponent implements OnInit, OnDestroy {
   @ViewChild('poModal', { static: true }) poModal: PoModalComponent;
+  @ViewChild('block', { static: true }) block: PoInputComponent;
 
   tableItems = [];
   itemSelecteted: any;
@@ -80,6 +81,9 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
     this.setForm();
     this.residentsListener();
     this.getById();
+    setTimeout(() => {
+      this.block.focus();
+    }, 300);
   }
 
   ngOnDestroy(): void {

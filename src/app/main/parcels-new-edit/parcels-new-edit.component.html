@@ -12,6 +12,7 @@
 
         <div class="row">
             <po-number
+                #block
                 class="col-2"
                 formControlName="block"
                 [p-clean]="true"
@@ -92,6 +93,7 @@
          </po-datepicker>
         </div>
     </form>
+
     <po-modal 
         #poModal
         [p-title]="modalTitle" 

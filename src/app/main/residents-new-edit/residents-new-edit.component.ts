@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PoNotificationService, PoPageEditLiterals } from '@po-ui/ng-components';
+import { PoInputComponent, PoNotificationService, PoPageEditLiterals } from '@po-ui/ng-components';
 import { ResidentsService } from 'src/app/services/residents/residents.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { ResidentsService } from 'src/app/services/residents/residents.service';
   styleUrls: ['./residents-new-edit.component.scss']
 })
 export class ResidentsNewEditComponent implements OnInit {
+  @ViewChild('block', { static: true }) block: PoInputComponent;
 
   form: FormGroup;
   id: string;
@@ -31,6 +32,9 @@ export class ResidentsNewEditComponent implements OnInit {
     this.id = this.route.snapshot.params.id;
     this.setForm();
     this.getById();
+    setTimeout(() => {
+      this.block.focus();
+    }, 300);
   }
 
  setForm(){
