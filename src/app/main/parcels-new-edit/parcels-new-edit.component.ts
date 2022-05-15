@@ -105,7 +105,7 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
     });
     this.observeIsDelivered();
 
-    if(!this.id) {
+    if (!this.id) {
       this.form.get('date').setValue(this.today);
     }
   }
@@ -171,10 +171,15 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
   create() {
     const data = this.prepareDates(this.form.value);
     this.service.create(data)
-      .subscribe(() => {
-        this.poNotification.success('Cadastrado com sucesso!');
-        this.router.navigate(['/main/parcels']);
-      });
+      .subscribe(
+        () => {
+          this.poNotification.success('Cadastrado com sucesso!');
+          this.router.navigate(['/main/parcels']);
+        },
+        (err) => {
+          this.poNotification.error(err?.error);
+        }
+      );
   }
 
   edit() {
@@ -244,16 +249,16 @@ export class ParcelsNewEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  reloadResidents(){
+  reloadResidents() {
     const params = {
       apartment: this.form.get('apartment').value,
       block: this.form.get('block').value
     };
     this.service.getByAddress(params)
-        .subscribe(res => {
-          this.tableItems = [...res];
-          this.newResident = '';
-    });
+      .subscribe(res => {
+        this.tableItems = [...res];
+        this.newResident = '';
+      });
   }
 
   private prepareDates(form) {
